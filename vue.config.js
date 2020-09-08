@@ -2,7 +2,7 @@ const path = require('path')
 const vueSrc = './src'
 
 module.exports = {
-  runTimeCompiler: true,
+  runtimeCompiler: true,
   publicPath: '/eve-echoes-tools-corp/',
   configureWebpack: {
     resolve: {
