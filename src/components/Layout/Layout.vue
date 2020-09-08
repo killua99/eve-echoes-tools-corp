@@ -46,12 +46,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 2em;
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - 100px);
 }
 header {
   position: fixed;
+  z-index: 1;
   top: 2em;
   width: 100vw;
 

@@ -6,6 +6,16 @@
       placeholder="Name of the item"
       @input="$emit('update:Items', $event.target.value)"
       @keyup.enter="addNewItem"
+    />    
+    <input
+      type="number"
+      min="0" 
+      max="999999"
+      :value="newItem"
+      class="newPrice"
+      placeholder="Name of the item"
+      @input="$emit('update:Items', $event.target.value)"
+      @keyup.enter="addNewItem"
     />
     <button @click="addNewItem">
       ➕
@@ -30,8 +40,8 @@ export default {
 }
 </script>
 
-<style lang="scss" module>
-.newTodo {
+<style lang="scss" scope>
+.newItem {
   background-color: var(--color-todo-background);
   border: 1px solid var(--color-todo-border);
   font-size: 24px;
@@ -39,5 +49,10 @@ export default {
   padding: 16px 16px 16px 76px;
   position: relative;
   width: 100%;
+}
+.newPrice {
+  width: 55px;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
 }
 </style>
