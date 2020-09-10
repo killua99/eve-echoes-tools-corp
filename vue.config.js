@@ -6,7 +6,7 @@ module.exports = {
   publicPath: '/eve-echoes-tools-corp/',
   configureWebpack: {
     resolve: {
-      extensions: ['.js', '.vue', '.json'],
+      extensions: ['.js', '.ts', '.vue', '.json'],
       alias: {
         '@': path.join(__dirname, vueSrc)
       }

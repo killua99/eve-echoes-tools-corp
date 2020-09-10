@@ -1,9 +1,9 @@
 <template>
   <Layout>
-    <template v-slot:default>
+    <template #:default>
       Default content
     </template>
-    <template v-slot:footer>
+    <template #:footer>
       <p>Footer uno</p>
     </template>
   </Layout>

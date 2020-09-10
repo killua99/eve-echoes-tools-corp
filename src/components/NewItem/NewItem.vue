@@ -2,42 +2,51 @@
   <div>
     <input
       type="text"
-      :value="newItem"
-      placeholder="Name of the item"
-      @input="$emit('update:Items', $event.target.value)"
-      @keyup.enter="addNewItem"
-    />    
+      :value="itemName"
+      placeholder="Item name"
+      @input="$emit('update:itemName', $event.target.value)"
+    >
     <input
       type="number"
-      min="0" 
+      min="0"
       max="999999"
-      :value="newItem"
+      :value="itemCost"
       class="newPrice"
-      placeholder="Name of the item"
-      @input="$emit('update:Items', $event.target.value)"
+      placeholder="Cost / Unit"
+      @input="$emit('update:itemCost', $event.target.value)"
       @keyup.enter="addNewItem"
-    />
-    <button @click="addNewItem">
+    >
+    <button
+      class="button"
+      @click="addNewItem"
+    >
       ➕
     </button>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   props: {
-    newItem: {
+    itemName: {
+      type: String,
+      required: true
+    },
+    itemCost: {
       type: String,
       required: true
     }
   },
   setup(props, { emit }) {
+
     function addNewItem() {
       emit('add-new-item')
     }
     return { addNewItem }
   }
-}
+})
 </script>
 
 <style lang="scss" scope>
@@ -54,5 +63,8 @@ export default {
   width: 55px;
   -webkit-appearance: none;
   -moz-appearance: textfield;
+}
+.button {
+  padding: 0;
 }
 </style>

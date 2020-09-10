@@ -1,5 +1,8 @@
 <template>
-  <nav id="main-menu" class="menu">
+  <nav
+    id="main-menu" 
+    class="menu"
+  >
     <v-link
       href="./"
       title="Home"

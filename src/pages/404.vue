@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <template v-slot:default>
+    <template #:default>
       Nada aquí
     </template>
   </Layout>

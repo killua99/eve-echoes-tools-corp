@@ -1,6 +1,10 @@
 <template>
-  <a :href="href" title="{{ title }}" class="menu-item">
-    <slot></slot>
+  <a 
+    :href="href" 
+    :title="title" 
+    class="menu-item"
+  >
+    <slot />
   </a>
 </template>
 
@@ -9,11 +13,12 @@ export default {
   props: {
     href: {
       type: String,
-      required: true
+      required: true,
     },
     title: {
-      type: String
-    }
+      type: String,
+      default: '',
+    },
   },
-}
+};
 </script>
