@@ -10,9 +10,11 @@
       <Item
         v-for="item in items"
         :key="item.id"
+        :item-key="item.id"
         :item-name="item.name"
         :item-cost="item.cost"
         class="list-item"
+        @delete-item="deleteItem"
       />
     </ul>
   </Layout>
@@ -61,7 +63,6 @@ export default defineComponent({
     });
 
     function addNewItem(): void {
-      console.log(itemName.value)
       if (itemName.value === '') {
         return
       }
@@ -74,11 +75,16 @@ export default defineComponent({
       itemCost.value = ''
     }
 
+    function deleteItem(itemId: string): void {
+      items.value = items.value.filter((item) => item.id !== itemId);
+    }
+
     return {
       itemName,
       itemCost,
       items,
-      addNewItem
+      addNewItem,
+      deleteItem
     }
   }
 })
