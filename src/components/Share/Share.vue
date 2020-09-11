@@ -4,7 +4,7 @@
       <p>Export:</p>
       <input
         class="export-field"
-        :value="exportStore"
+        :value="'http://localhost:8080/eve-echoes-tools-corp/share?import=' + exportStore"
         @focus="onFocusExport($event.target)"
       >
     </label>
@@ -20,6 +20,9 @@
         @click="importStore"
       >Import</button>
     </label>
+    <div v-if="importDone">
+      <h3>Import success</h3>
+    </div>
   </div>
 </template>
 
@@ -32,9 +35,13 @@ export default defineComponent({
   name: 'ShareComponent',
   setup() {
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const importParam = urlParams.get('import');
+
     const items = ref<Array<{ id: string; name: string; cost: number; }>>([])
     const exportStore = ref('')
     const importStoreValue = ref('')
+    const importDone = ref(false)
     // LOCAL_STORE_CONTRACT_ITEMS_KEY
     // const contractItems = ref<Array<{ id: string; itemId: string; quantity: number; }>>([])
 
@@ -53,6 +60,11 @@ export default defineComponent({
       const itemsToSet = localStorageValue ? JSON.parse(localStorageValue) : [];
       items.value = itemsToSet;
       getExport(items)
+
+      if (importParam) {
+        importStoreValue.value = importParam
+        importStore()
+      }
     });
 
     const getExport = (items: typeof items) => {
@@ -67,6 +79,13 @@ export default defineComponent({
 
     const onFocusExport = (target: HTMLInputElement) => {
       target.select()
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copying text command was ' + msg);
+      } catch (err) {
+        console.log('Oops, unable to copy');
+      }
     }
 
     const importStore = () => {
@@ -85,6 +104,8 @@ export default defineComponent({
         if (storeContractItems) {
           // TODO: Finish the contract import
         }
+
+        importDone.value = true
       })
 
       items.value.push = storeToSet.items ? storeToSet.items : []
@@ -92,6 +113,7 @@ export default defineComponent({
 
 
     return {
+      importDone,
       importStoreValue,
       exportStore,
       onFocusExport,
