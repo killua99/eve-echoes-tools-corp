@@ -4,7 +4,8 @@
       <p>Export:</p>
       <input
         class="export-field"
-        :value="'http://localhost:8080/eve-echoes-tools-corp/share?import=' + exportStore"
+        :value="exportStore"
+        placeholder="Nothing to export yet"
         @focus="onFocusExport($event.target)"
       >
     </label>
@@ -58,23 +59,25 @@ export default defineComponent({
     onBeforeMount(() => {
       const localStorageValue = localStorage.getItem(LOCAL_STORE_ITEMS_KEY);
       const itemsToSet = localStorageValue ? JSON.parse(localStorageValue) : [];
+
       items.value = itemsToSet;
-      getExport(items)
 
       if (importParam) {
         importStoreValue.value = importParam
         importStore()
       }
+
+      getExport()
     });
 
-    const getExport = (items: typeof items) => {
-      if (items._rawValue.length < 1) return;
+    const getExport = () => {
+      if (items.value.length < 1) return;
 
       const store = {
         storeItems: items.value
       }
 
-      exportStore.value =  btoa(JSON.stringify([store]))
+      exportStore.value = 'http://localhost:8080/eve-echoes-tools-corp/share?import=' + btoa(JSON.stringify([store]))
     }
 
     const onFocusExport = (target: HTMLInputElement) => {
@@ -94,7 +97,12 @@ export default defineComponent({
       const storeBase64 = atob(importStoreValue.value)
       const storeToSet = JSON.parse(storeBase64)
 
-      storeToSet.map(stores => {
+      interface storesType {
+        storeItems: Array<{ id: string; name: string; cost: number; }>
+        storeContractItems: Array<{ id: string; name: string; cost: number; }>
+      }
+
+      storeToSet.map(function(stores: storesType) {
         const { storeItems, storeContractItems } = stores
 
         if (storeItems) {
