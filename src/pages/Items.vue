@@ -97,6 +97,7 @@ export default defineComponent({
     font-size: 1.3em;
     background: rgb(10, 26, 48);
     padding: .6em .3em;
+    margin-bottom: .1em;
 
     &-name {
       display: inline-block;
