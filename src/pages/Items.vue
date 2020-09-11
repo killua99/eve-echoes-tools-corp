@@ -6,25 +6,27 @@
       v-model:item-cost="itemCost"
       @add-new-item="addNewItem"
     />
-    <ul>
+    <ul class="list">
       <Item
         v-for="item in items"
         :key="item.id"
         :item-name="item.name"
         :item-cost="item.cost"
+        class="list-item"
       />
     </ul>
   </Layout>
 </template>
 
 <script lang="ts">
-import { reactive, ref, onBeforeMount, watch, defineComponent, onMounted } from 'vue'
+import { ref, onBeforeMount, watch, defineComponent } from 'vue'
 // import { useStore } from 'vuex'
 import { nanoid } from 'nanoid';
 
-import Layout from "@/components/Layout"
-import NewItem from "@/components/NewItem"
-import Item from "@/components/Item"
+import Layout from '@/components/Layout'
+import NewItem from '@/components/NewItem'
+import Item from '@/components/Item'
+import { LOCAL_STORE_ITEMS_KEY } from '@/store/localStorage'
 
 export default defineComponent({
   name: "Items",
@@ -34,8 +36,6 @@ export default defineComponent({
       Item,
   },
   setup() {
-
-    const LOCAL_STORE_ITEMS_KEY = 'ee_tools_corp_items'
 
     // const store = useStore()
 
@@ -83,3 +83,28 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scope>
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 2em 0;
+  padding: 0 .3em;
+  text-align: initial;
+
+  &-item {
+    font-size: 1.3em;
+    background: rgb(10, 26, 48);
+    padding: .6em .3em;
+
+    &-name {
+      display: inline-block;
+      width: 50%;
+    }
+    &-cost {
+
+    }
+  }
+}
+</style>

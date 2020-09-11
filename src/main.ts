@@ -32,7 +32,7 @@ const SimpleRouterApp = {
 }
 
 
-const app = createApp(SimpleRouterApp).use(store)
+const app = createApp(SimpleRouterApp)
 
 app.use(store)
 

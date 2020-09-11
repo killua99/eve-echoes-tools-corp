@@ -1,11 +1,6 @@
 <template>
   <Layout>
-    <template #default>
-      Default content
-    </template>
-    <template #footer>
-      <p>Footer uno</p>
-    </template>
+    <share-component />
   </Layout>
 </template>
 
@@ -13,11 +8,13 @@
 import { defineComponent } from 'vue'
 
 import Layout from '@/components/Layout'
+import ShareComponent from '@/components/Share'
 
 export default defineComponent({
-  name: 'Home',
+  name: 'Share',
   components: {
-    Layout
+    Layout,
+    ShareComponent
   }
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="inner">
     <header class="superman">
       <Menu />
       <slot name="main" />
@@ -13,10 +13,11 @@
       </aside>
     </main>
     <footer>
+      <FooterMenu />
       <slot name="footer" />
       <p>
-        &copy; {{ new Date().getFullYear() }} Written by <a 
-          class="copy-link" 
+        &copy; {{ new Date().getFullYear() }} Written by <a
+          class="copy-link"
           href="https://github.com/killua99"
         >@killua99</a>
       </p>
@@ -24,19 +25,23 @@
   </div>
 </template>
 
-<script>
-import Menu from '@/components/Menu'
+<script lang="ts">
+import { defineComponent } from 'vue'
 
-export default {
+import Menu from '@/components/Menu'
+import FooterMenu from '@/components/Menu/FooterMenu.vue'
+
+export default defineComponent({
   components: {
-    Menu
+    Menu,
+    FooterMenu
   },
   computed: {
-    hasAside () {
+    hasAside (): boolean {
       return !!this.$slots.aside
     }
   }
-}
+})
 </script>
 
 <style lang="scss">
@@ -52,10 +57,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 100px);
+  color: rgba(176, 176, 176, 1);
 }
 header {
   position: fixed;
@@ -67,7 +69,11 @@ header {
 
   }
 }
-
+#inner {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 100px);
+}
 main {
   position: relative;
   margin-top: 6em;
