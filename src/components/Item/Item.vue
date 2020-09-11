@@ -3,7 +3,8 @@
     <span @click="expandControls"><span class="list-item-name">{{ itemName }}</span> ISK <span class="list-item-cost">{{ itemCost }} / Unit</span></span>
     <div
       v-if="controlsExpanded"
-      class="controls">
+      class="controls"
+    >
       <button @click="deleteItem">
         <img src="./trash-alt-solid.svg">
       </button>

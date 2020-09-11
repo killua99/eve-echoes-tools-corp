@@ -109,9 +109,6 @@ export default defineComponent({
       display: inline-block;
       width: 50%;
     }
-    &-cost {
-
-    }
   }
 }
 </style>
