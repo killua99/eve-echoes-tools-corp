@@ -77,7 +77,7 @@ export default defineComponent({
         storeItems: items.value
       }
 
-      exportStore.value = 'http://localhost:8080/eve-echoes-tools-corp/share?import=' + btoa(JSON.stringify([store]))
+      exportStore.value = 'https://killua99.github.io/eve-echoes-tools-corp/share?import=' + btoa(JSON.stringify([store]))
     }
 
     const onFocusExport = (target: HTMLInputElement) => {
