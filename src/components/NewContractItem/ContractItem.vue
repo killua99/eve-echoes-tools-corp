@@ -2,14 +2,13 @@
   <li>
     <span
       class="list-item-name"
-      @click="expandControls"
     >{{ item.name }}</span> Qty:
     <input
       type="number"
       min="0"
       max="999999"
       :value="itemQuantity"
-      @input="$emit(updateQuantity)"
+      @input="updateQuantity($event.target.value)"
     >
     <img
       class="list-item-delete"
@@ -20,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, toRefs } from 'vue'
 
 import { trashAltSolid } from '@/assets/icons'
 
@@ -38,26 +37,28 @@ export default defineComponent({
     itemQuantity: {
       type: Number,
       required: true,
-      default: 0
     },
     contract: {
       type: Object,
       required: true
     }
   },
-  setup(_, { emit }) {
+  setup(props, { emit }) {
     const controlsExpanded = ref(false)
+
+    const { contract } = toRefs(props)
 
     const expandControls = (): void => {
       controlsExpanded.value = !controlsExpanded.value
     }
 
     const deleteItem = () => {
-      emit('delete-contract-item', _.item.id)
+      emit('delete-contract-item', props.item.id)
     }
 
-    const updateQuantity = () => {
-      emit('update-quantity')
+    const updateQuantity = (quantity: Number) => {
+      contract.value.quantity = quantity
+      emit('update-quantity', contract.value)
     }
 
     return {

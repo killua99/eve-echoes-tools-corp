@@ -12,18 +12,21 @@
         :key="item.id"
         :item-key="item.id"
         :item="filterItems(item.itemId)"
-        :item-quantity="item.cost"
+        :item-quantity="item.quantity"
         :contract="item"
         class="list-item"
         @update-quantity="updateQuantity"
         @delete-contract-item="deleteContractItem"
       />
     </ul>
+    <div class="total-contract">
+      <span>Total: {{ totalContract }}</span>
+    </div>
   </Layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, ref, watch } from 'vue'
+import { computed, defineComponent, onBeforeMount, ref, watch } from 'vue'
 import { nanoid } from 'nanoid';
 
 import Layout from '@/components/Layout'
@@ -41,13 +44,28 @@ export default defineComponent({
   setup() {
 
     const items = ref<Array<{ id: string; name: string; cost: number; }>>([])
-    const contractItems = ref<Array<{ id: string; itemId: string; cuantity: number; }>>([])
+    const contractItems = ref<Array<{ id: string; itemId: string; quantity: number; }>>([])
     const itemSelected = ref('')
+
+    const totalContract = computed(() => {
+      let total: number = 0
+
+      contractItems.value.forEach((contractItem) => {
+        const item = filterItems(contractItem.itemId)
+
+        if (!item) return
+
+        total = total + (item.cost * contractItem.quantity)
+      })
+
+      return total
+    })
 
     watch(
       contractItems,
       (contractItems) => {
-        localStorage.setItem(LOCAL_STORE_CONTRACT_ITEMS_KEY, JSON.stringify([...contractItems]))
+        storeSave(LOCAL_STORE_CONTRACT_ITEMS_KEY, contractItems)
+        // localStorage.setItem(LOCAL_STORE_CONTRACT_ITEMS_KEY, JSON.stringify([...contractItems]))
       },
       {
         deep: true
@@ -67,6 +85,10 @@ export default defineComponent({
       contractItems.value = contractItemsToSet;
     });
 
+    const storeSave = (key: string, entities: Object[]): void => {
+      localStorage.setItem(key, JSON.stringify([...entities]))
+    }
+
     const addItem = (): void => {
       if (itemSelected.value === '') {
         return
@@ -75,7 +97,7 @@ export default defineComponent({
       contractItems.value.push({
         id: `${nanoid()}`,
         itemId: itemSelected.value,
-        cuantity: 0
+        quantity: 0
       })
       itemSelected.value = ''
     }
@@ -88,8 +110,11 @@ export default defineComponent({
       return items.value.find((item) => item.id === itemId)
     }
 
-    const updateQuantity = () => {
-      console.log()
+    const updateQuantity = (contractItem: any) => {
+      const matchedEditContractItem = contractItems.value.find((item) => item.id === contractItem.id);
+      if (!matchedEditContractItem) return
+      matchedEditContractItem.quantity = contractItem.quantity === '' ? 0 : contractItem.quantity;
+      storeSave(LOCAL_STORE_CONTRACT_ITEMS_KEY, contractItems.value)
     }
 
     return {
@@ -99,7 +124,8 @@ export default defineComponent({
       deleteContractItem,
       contractItems,
       filterItems,
-      updateQuantity
+      updateQuantity,
+      totalContract
     }
   }
 })
