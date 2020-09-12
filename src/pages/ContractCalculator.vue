@@ -103,7 +103,7 @@ export default defineComponent({
     }
 
     const deleteContractItem = (itemId: String): void => {
-      items.value = items.value.filter((item) => item.id !== itemId);
+      contractItems.value = contractItems.value.filter((item) => item.id !== itemId);
     }
 
     const filterItems = (itemId: string) => {

@@ -53,7 +53,7 @@ export default defineComponent({
     }
 
     const deleteItem = () => {
-      emit('delete-contract-item', props.item.id)
+      emit('delete-contract-item', contract.value.id)
     }
 
     const updateQuantity = (quantity: Number) => {
