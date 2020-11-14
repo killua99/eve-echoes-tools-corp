@@ -1,6 +1,11 @@
 # eve-echoes-tools-corp
+EVE Echoes tools is an app to help corps to handle tasks like calculating contrats or so.
 
-## Project setup
+## Development
+
+To start developing this tools to add features follow these steps.
+
+### Project setup
 ```
 yarn install
 ```

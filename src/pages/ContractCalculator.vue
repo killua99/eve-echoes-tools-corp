@@ -6,7 +6,7 @@
       v-model:items="items"
       @add-item="addItem"
     />
-    <ul class="list">
+    <ul class="contract-list">
       <ContractItem
         v-for="item in contractItems"
         :key="item.id"
@@ -132,7 +132,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scope>
-.list {
+.contract-list {
   list-style: none;
   display: flex;
   flex-direction: column;

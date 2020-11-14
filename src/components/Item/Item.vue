@@ -53,7 +53,25 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scope>
+
+li {
+    font-size: 1.3em;
+    background: rgb(10, 26, 48);
+    padding: .6em .3em;
+    margin-bottom: .1em;
+
+    &:nth-child(even) {
+      background: rgb(48, 66, 92);
+    }
+
+
+    &-name {
+      display: inline-block;
+      width: 50%;
+    }
+}
+
 .controls {
   text-align: right;
   padding: .5em 0;

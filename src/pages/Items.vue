@@ -98,17 +98,5 @@ export default defineComponent({
   margin: 2em 0;
   padding: 0 .3em;
   text-align: initial;
-
-  &-item {
-    font-size: 1.3em;
-    background: rgb(10, 26, 48);
-    padding: .6em .3em;
-    margin-bottom: .1em;
-
-    &-name {
-      display: inline-block;
-      width: 50%;
-    }
-  }
 }
 </style>

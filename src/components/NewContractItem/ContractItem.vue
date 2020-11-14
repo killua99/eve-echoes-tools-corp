@@ -81,6 +81,14 @@ export default defineComponent({
 .list-item {
 
   display: flex;
+  font-size: 1.3em;
+  background: rgb(10, 26, 48);
+  padding: .6em .3em;
+  margin-bottom: .1em;
+
+  &:nth-child(even) {
+    background: rgb(48, 66, 92);
+  }
 
   &-name {
     width: 50%;
@@ -94,7 +102,7 @@ export default defineComponent({
   }
 
   input {
-    width: 3em;
+    width: 4em;
     margin-left: .3em;
     -webkit-appearance: none;
     -moz-appearance: textfield;

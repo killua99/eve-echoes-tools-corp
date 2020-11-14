@@ -1,15 +1,15 @@
 <template>
   <nav
     id="footer-menu"
-    class="menu"
+    class="footer-menu"
   >
     <v-link
       href="./share"
       title="Share"
-      class="menu-item__share"
+      class="footer-menu-item__share"
     >
       <img
-        class="menu-item__share-img"
+        class="footer-menu-item__share-img"
         src="./share-alt-solid.svg"
       >
     </v-link>
@@ -29,8 +29,8 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
-.menu {
+<style lang="scss">
+.footer-menu {
   display: flex;
   flex-direction: row;
   justify-content: right;
@@ -39,8 +39,12 @@ export default defineComponent({
   &-item {
     background: rgb(10, 26, 48);
     color: rgb(127, 185, 186);
-    padding: .3em;
+    font-family: 'Shentox W04 Light';
+    text-decoration: none;
     display: inline-block;
+    padding: .4em;
+    flex: 0 1 auto;
+    margin: 0 1px;
 
     &__share-img {
       width: 1.4em;

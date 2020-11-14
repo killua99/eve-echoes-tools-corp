@@ -1,6 +1,6 @@
 <template>
   <nav
-    id="main-menu" 
+    id="main-menu"
     class="menu"
   >
     <v-link
@@ -34,7 +34,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .menu {
   display: flex;
   margin: 0 auto;
